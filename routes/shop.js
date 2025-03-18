@@ -7,5 +7,5 @@ const __dirname = import.meta.dirname;
 export const shopRouter = Router();
 
 shopRouter.get("/", (req, res, next) => {
-  res.render("shop");
+  res.render("shop", { products, title: "shop" });
 });
