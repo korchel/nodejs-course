@@ -5,11 +5,20 @@ const __dirname = import.meta.dirname;
 export const adminRouter = Router();
 export const products = [];
 adminRouter.get("/add-product", (req, res, next) => {
-  res.render("add-product", { products, title: "add product" });
+  res.render("add-product", {
+    products,
+    title: "add product",
+    path: "/admin/add-product",
+    activeAddProduct: true,
+    isForm: true,
+    isProduct: true,
+  });
 });
 
 adminRouter.post("/add-product", (req, res, next) => {
   const { title } = req.body;
-  products.push({ title });
+  products.push({
+    title,
+  });
   res.redirect("/");
 });
