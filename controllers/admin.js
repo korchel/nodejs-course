@@ -2,7 +2,7 @@ import { Product } from "../models/product.js";
 
 export const getAddProductPage = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render("add-product", {
+    res.render("admin/add-product", {
       products,
       title: "add product",
       path: "/admin/add-product",
@@ -14,21 +14,18 @@ export const getAddProductPage = (req, res, next) => {
 };
 
 export const postProduct = (req, res, next) => {
-  const { title } = req.body;
-  const newProduct = new Product(title);
+  const { title, imageUrl, price, description } = req.body;
+  const newProduct = new Product(title, imageUrl, price, description);
   newProduct.save();
-  res.redirect("/");
+  res.redirect("/admin/products");
 };
 
-export const getProducts = (req, res, next) => {
+export const getProductsPageForAdmin = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render("shop", {
+    res.render("admin/products", {
       products,
-      title: "shop",
-      path: "/",
-      hasProducts: products.length > 0,
-      activeShop: true,
-      isProduct: true,
+      title: "Admin products",
+      path: "/admin/products",
     });
   });
 };
